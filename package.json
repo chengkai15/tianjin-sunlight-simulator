@@ -1,0 +1,26 @@
+{
+  "name": "tianjin-sunlight-simulator",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vitest --run && tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "deploy:local": "npx serve dist -l 3000",
+    "deploy:netlify": "npx netlify-cli deploy --prod --dir=dist"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "fast-check": "^4.6.0",
+    "jsdom": "^29.0.1",
+    "serve": "^14.2.6",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.2",
+    "vitest": "^4.1.1"
+  }
+}

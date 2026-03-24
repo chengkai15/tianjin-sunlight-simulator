@@ -1,0 +1,424 @@
+/* ===== CSS Custom Properties ===== */
+:root {
+  --color-bg: #1a1a2e;
+  --color-surface: #16213e;
+  --color-surface-alt: #0f3460;
+  --color-primary: #e94560;
+  --color-accent: #f5a623;
+  --color-text: #eaeaea;
+  --color-text-muted: #a0a0b8;
+  --color-border: #2a2a4a;
+  --color-sun-high: #ffdd57;
+  --color-sun-mid: #f5a623;
+  --color-sun-low: #e94560;
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --transition: 0.2s ease;
+}
+
+/* ===== Reset & Base ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ===== Header ===== */
+.app-header {
+  text-align: center;
+  padding: 16px 12px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.app-header h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--color-sun-high), var(--color-primary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== Main Layout (Mobile-first: column) ===== */
+.app-main {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 60px);
+}
+
+.control-panel {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--color-surface);
+}
+
+.visualization-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  min-height: 300px;
+}
+
+/* ===== Control Groups ===== */
+.control-group {
+  background: var(--color-surface-alt);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: 0 2px 8px var(--color-shadow);
+}
+
+.control-title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+/* ===== Rotary Control ===== */
+.rotary-control {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 16px;
+}
+
+.rotary-dial {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid var(--color-border);
+  background: radial-gradient(circle, var(--color-surface) 60%, var(--color-surface-alt));
+  cursor: grab;
+  position: relative;
+  transition: border-color var(--transition);
+}
+
+.rotary-dial:active {
+  cursor: grabbing;
+  border-color: var(--color-accent);
+}
+
+/* Direction indicator line inside the dial */
+.rotary-indicator {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width: 3px;
+  height: 40%;
+  background: var(--color-accent);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.rotary-indicator::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: var(--color-accent);
+  border-radius: 50%;
+}
+
+.compass-label {
+  position: absolute;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  user-select: none;
+}
+
+.compass-n {
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-primary);
+}
+
+.compass-s {
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.compass-e {
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.compass-w {
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ===== Orientation Input ===== */
+.orientation-input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.orientation-input-group label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+#orientation-input {
+  width: 72px;
+  padding: 6px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 1rem;
+  text-align: center;
+  outline: none;
+  transition: border-color var(--transition);
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+#orientation-input::-webkit-inner-spin-button,
+#orientation-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#orientation-input:focus {
+  border-color: var(--color-accent);
+}
+
+.degree-symbol {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+}
+
+.direction-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  min-width: 2em;
+}
+
+/* ===== Season Selector ===== */
+.season-selector {
+  display: flex;
+  gap: 8px;
+}
+
+.season-btn {
+  flex: 1;
+  padding: 8px 4px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.season-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.season-btn[aria-checked="true"],
+.season-btn.active {
+  background: linear-gradient(135deg, var(--color-sun-low), var(--color-sun-mid));
+  color: #fff;
+  border-color: transparent;
+  font-weight: 600;
+}
+
+/* ===== Season Info ===== */
+.season-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.season-date {
+  font-weight: 500;
+}
+
+/* ===== Time Slider ===== */
+.time-slider-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#time-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--color-sun-low), var(--color-sun-high), var(--color-sun-low));
+  outline: none;
+}
+
+#time-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(245, 166, 35, 0.5);
+}
+
+#time-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(245, 166, 35, 0.5);
+}
+
+.time-display {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  min-width: 3.5em;
+  text-align: right;
+}
+
+/* ===== Data Panel ===== */
+.data-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.data-item {
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  text-align: center;
+}
+
+.data-item dt {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
+.data-item dd {
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--color-sun-high), var(--color-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== Canvas ===== */
+#sunlight-canvas {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: inset 0 2px 12px var(--color-shadow);
+}
+
+/* ===== Light Intensity Gradient Utility ===== */
+.light-intensity-high {
+  background: linear-gradient(180deg, var(--color-sun-high), var(--color-sun-mid));
+}
+
+.light-intensity-mid {
+  background: linear-gradient(180deg, var(--color-sun-mid), var(--color-sun-low));
+}
+
+.light-intensity-low {
+  background: linear-gradient(180deg, var(--color-sun-low), var(--color-bg));
+}
+
+/* ===== Desktop Layout (≥768px) ===== */
+@media (min-width: 768px) {
+  .app-header {
+    padding: 20px 24px;
+  }
+
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .app-main {
+    flex-direction: row;
+  }
+
+  .control-panel {
+    width: 320px;
+    min-width: 320px;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    border-right: 1px solid var(--color-border);
+    padding: 20px;
+  }
+
+  .visualization-area {
+    flex: 1;
+    padding: 20px;
+    min-height: calc(100vh - 60px);
+  }
+
+  .rotary-control {
+    width: 200px;
+    height: 200px;
+  }
+
+  .compass-n { top: -6px; }
+  .compass-s { bottom: -6px; }
+  .compass-e { right: -16px; }
+  .compass-w { left: -16px; }
+}
+
+/* ===== Large screens (≥1200px) ===== */
+@media (min-width: 1200px) {
+  .control-panel {
+    width: 360px;
+    min-width: 360px;
+    padding: 24px;
+  }
+
+  .app-header h1 {
+    font-size: 1.75rem;
+  }
+}
